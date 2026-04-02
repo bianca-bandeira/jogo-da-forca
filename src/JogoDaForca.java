@@ -23,10 +23,15 @@ public class JogoDaForca{
 			dicas.add(divisao[1]);
 		}
 		arquivo.close();
+		System.out.println(palavras);
+		System.out.println(dicas);
+	}
+	
+	public static void main(String[] args) {
+		new JogoDaForca();
 	}
 	
 	public void iniciar() {
-		//
 		//incompleto
 	}
 	
