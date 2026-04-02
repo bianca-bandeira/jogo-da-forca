@@ -4,10 +4,29 @@ import java.util.*;
 import javax.swing.JOptionPane;
 
 public class JogoDaForca{
+	private String palavra;
+	private String dica;
+
+	public void setPalavra(String palavra) {
+		this.palavra = palavra;
+	}
+
+	public void setDica(String dica) {
+		this.dica = dica;
+	}
+
+	public String getDica() {
+		return dica;
+	}
+
+	public String getPalavra() {
+		return palavra;
+	}
+
+	ArrayList<String> palavras = new ArrayList<>();
+	ArrayList<String> dicas = new ArrayList<>();
 
 	public JogoDaForca() {
-		ArrayList<String> palavras = new ArrayList<>();
-		ArrayList<String> dicas = new ArrayList<>();
 		
 		InputStream stream = this.getClass().getResourceAsStream("/dados/palavras.txt");
 		if (stream == null) {
@@ -32,18 +51,16 @@ public class JogoDaForca{
 	}
 	
 	public void iniciar() {
-		//incompleto
+		Random sorteio = new Random();
+		int numero = sorteio.nextInt(0,palavras.size());
+
+		String palavra_sorteada = palavras.get(numero);
+		setPalavra(palavra_sorteada);
+
+		String dica_sorteada = dicas.get(numero);
+		setDica(dica_sorteada);
 	}
-	
-	public String getDica() {
-		return null;
-		//incompleto
-	}
-	
-	public String getPalavra() {
-		return null;
-		//incompleto
-	}
+
 	
 	public ArrayList<String> getResultados() {
 		return null;
