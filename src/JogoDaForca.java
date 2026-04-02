@@ -6,6 +6,16 @@ import javax.swing.JOptionPane;
 public class JogoDaForca{
 	private String palavra;
 	private String dica;
+	private Integer acertos = 0;
+	private Integer codigoPenalidades = 0;
+
+	public void setAcertos(Integer acertos) {
+		this.acertos = acertos;
+	}
+
+	public void setCodigoPenalidades(Integer codigoPenalidades) {
+		this.codigoPenalidades = codigoPenalidades;
+	}
 
 	public void setPalavra(String palavra) {
 		this.palavra = palavra;
@@ -54,11 +64,11 @@ public class JogoDaForca{
 		Random sorteio = new Random();
 		int numero = sorteio.nextInt(0,palavras.size());
 
-		String palavra_sorteada = palavras.get(numero);
-		setPalavra(palavra_sorteada);
+		String palavraSorteada = palavras.get(numero);
+		setPalavra(palavraSorteada);
 
-		String dica_sorteada = dicas.get(numero);
-		setDica(dica_sorteada);
+		String dicaSorteada = dicas.get(numero);
+		setDica(dicaSorteada);
 	}
 
 	
@@ -68,8 +78,29 @@ public class JogoDaForca{
 	}
 	
 	public ArrayList<Integer> getOcorrencias(String letra) throws Exception {
-		return null;
-		//incompleto
+			if(letra.length() != 1){ //lembrar de verificar também se o caracter é uma letra mesmo
+				throw new Exception("Caractere inválido");
+			}
+			ArrayList<Integer> posicoes = new ArrayList<>();
+			letra = letra.toUpperCase(); // Deixa a letra maiúscula
+			int posicao = 0; // vai ser o contador
+
+			for(char c : palavra.toCharArray()){
+				String letraAtual = String.valueOf(c); //transforma o c(char) em string
+				if (letraAtual.equals(letra)){
+					posicoes.add(posicao);
+				}
+				posicao++;
+			}
+
+			if(posicoes.isEmpty()){
+				int erros = getCodigoPenalidade();
+				setCodigoPenalidades(erros+1);
+			} else {
+				int corretos = posicoes.size();
+				setAcertos(corretos);
+			}
+		return posicoes;
 	}
 	
 	public boolean terminou() {
@@ -78,13 +109,11 @@ public class JogoDaForca{
 	}
 	
 	public int getAcertos() {
-		return 0;
-		//incompleto
+		return acertos;
 	}
 	
 	public int getCodigoPenalidade() {
-		return 0;
-		//incompleto
+		return codigoPenalidades;
 	}
 	
 	public String getNomePenalidade() {
