@@ -32,6 +32,8 @@ public class JogoDaForca{
 	public String getPalavra() {
 		return palavra;
 	}
+	
+	public 
 
 	ArrayList<String> palavras = new ArrayList<>();
 	ArrayList<String> dicas = new ArrayList<>();
@@ -58,6 +60,7 @@ public class JogoDaForca{
 	
 	public static void main(String[] args) {
 		new JogoDaForca();
+		new TelaJogo();
 	}
 	
 	public void iniciar() {
