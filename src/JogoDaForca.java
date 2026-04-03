@@ -8,6 +8,16 @@ public class JogoDaForca{
 	private String dica;
 	private Integer acertos = 0;
 	private Integer codigoPenalidades = 0;
+	private char tentativa;
+	private String msg = "";
+	
+	public char getTentativa() {
+		return tentativa;
+	}
+	
+	public void setTentativa(char novaTentativa) {
+		tentativa = novaTentativa;
+	}
 
 	public void setAcertos(Integer acertos) {
 		this.acertos = acertos;
@@ -60,7 +70,6 @@ public class JogoDaForca{
 	
 	public static void main(String[] args) {
 		new JogoDaForca();
-		new TelaJogo();
 	}
 	
 	public void iniciar() {
@@ -101,8 +110,9 @@ public class JogoDaForca{
 				setCodigoPenalidades(erros+1);
 			} else {
 				int corretos = posicoes.size();
-				setAcertos(corretos);
+				setAcertos(corretos + getAcertos());
 			}
+		System.out.println(acertos);
 		return posicoes;
 	}
 	

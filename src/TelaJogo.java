@@ -20,12 +20,12 @@ public class TelaJogo {
 	private JLabel penalidadeLabel;
 	private JLabel dicaLabel;
 	private JLabel letraLabel;
-	private JTextField textField;
+	private JTextField tentativaField;
 	private JButton adivinharButton;
 	private JTextArea textArea;
 	private JLabel palavraLabel;
 	private JLabel imagemLabel;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -63,13 +63,18 @@ public class TelaJogo {
 		iniciarButton = new JButton("Iniciar");
 		iniciarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Precisa iniciar botão adivinhar
 				jogo.iniciar();
+				jogo.setAcertos(0);
+				jogo.setCodigoPenalidades(0);
 				
 				String acertosTexto = "Acertos: 0";
 				acertosLabel.setText(acertosTexto);
 				
 				String penalidadeTexto = "Penalidade: 0";
 				penalidadeLabel.setText(penalidadeTexto);
+				
+				adivinharButton.setEnabled(true);
 				
 				String dicaSorteada = "Dica: " + jogo.getDica();
 				dicaLabel.setText(dicaSorteada);
@@ -81,12 +86,12 @@ public class TelaJogo {
 		iniciarButton.setBounds(31, 30, 84, 20);
 		frame.getContentPane().add(iniciarButton);
 		
-		acertosLabel = new JLabel("Acertos: 0");
+		acertosLabel = new JLabel("");
 		acertosLabel.setForeground(new Color(0, 255, 0));
 		acertosLabel.setBounds(125, 30, 61, 20);
 		frame.getContentPane().add(acertosLabel);
 		
-		penalidadeLabel = new JLabel("Penalidade: 0");
+		penalidadeLabel = new JLabel("");
 		penalidadeLabel.setForeground(new Color(255, 0, 0));
 		penalidadeLabel.setBounds(196, 34, 216, 12);
 		frame.getContentPane().add(penalidadeLabel);
@@ -99,19 +104,35 @@ public class TelaJogo {
 		letraLabel.setBounds(31, 93, 42, 12);
 		frame.getContentPane().add(letraLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(83, 90, 27, 18);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		tentativaField = new JTextField();
+		tentativaField.setBounds(83, 90, 27, 18);
+		frame.getContentPane().add(tentativaField);
+		tentativaField.setColumns(10);
 		
 		adivinharButton = new JButton("Adivinhar");
+		adivinharButton.setEnabled(false);
 		adivinharButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String tentativa = tentativaField.getText();
+				if(!(tentativa.isEmpty())){
+									//jogo.setTentativa(tentativaChar)
+					try {
+						jogo.getOcorrencias(tentativa);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}else {
+					textArea.setText("campo vazio");
+				}
+				
 				String acertosTexto = "Acertos: " + Integer.toString(jogo.getAcertos());
 				acertosLabel.setText(acertosTexto);
 				
 				String penalidadeTexto = "Penalidade: " + Integer.toString(jogo.getCodigoPenalidade());
 				penalidadeLabel.setText(penalidadeTexto);
+				
+				
 			}
 		});
 		adivinharButton.setBounds(125, 89, 107, 20);
@@ -128,7 +149,6 @@ public class TelaJogo {
 		imagemLabel = new JLabel("");
 		imagemLabel.setBounds(256, 52, 170, 172);
 		frame.getContentPane().add(imagemLabel);
-		;
 		
 	}
 }
