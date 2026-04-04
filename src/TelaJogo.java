@@ -81,6 +81,17 @@ public class TelaJogo {
 				
 				String palavraSorteada = "palavra=" + jogo.getPalavra();
 				palavraLabel.setText(palavraSorteada);
+				
+				textArea.setText("jogo inicado - digite uma letra");
+				
+				ImageIcon icon = new ImageIcon(this.getClass().getResource("/imagens/0.png"));
+				icon.setImage(icon.getImage().getScaledInstance(
+						imagemLabel.getWidth(),
+						imagemLabel.getHeight(),
+						Image.SCALE_DEFAULT
+				));
+				
+				imagemLabel.setIcon(icon);
 			}
 		});
 		iniciarButton.setBounds(31, 30, 84, 20);
@@ -114,16 +125,16 @@ public class TelaJogo {
 		adivinharButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tentativa = tentativaField.getText();
-				if(!(tentativa.isEmpty())){
-									//jogo.setTentativa(tentativaChar)
-					try {
-						jogo.getOcorrencias(tentativa);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}else {
-					textArea.setText("campo vazio");
+				try {
+					jogo.getOcorrencias(tentativa);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				if(jogo.getCodigoPenalidade() >= 6) {
+					jogo.setResultados("perdeu!");
+					adivinharButton.setEnabled(false);
 				}
 				
 				String acertosTexto = "Acertos: " + Integer.toString(jogo.getAcertos());
@@ -132,7 +143,16 @@ public class TelaJogo {
 				String penalidadeTexto = "Penalidade: " + Integer.toString(jogo.getCodigoPenalidade());
 				penalidadeLabel.setText(penalidadeTexto);
 				
+				textArea.setText(jogo.getResultado());
 				
+				ImageIcon icon = new ImageIcon(this.getClass().getResource("/imagens/"+jogo.getCodigoPenalidade()+".png"));
+				icon.setImage(icon.getImage().getScaledInstance(
+						imagemLabel.getWidth(),
+						imagemLabel.getHeight(),
+						Image.SCALE_DEFAULT
+				));
+				
+				imagemLabel.setIcon(icon);
 			}
 		});
 		adivinharButton.setBounds(125, 89, 107, 20);
@@ -150,5 +170,13 @@ public class TelaJogo {
 		imagemLabel.setBounds(256, 52, 170, 172);
 		frame.getContentPane().add(imagemLabel);
 		
+		ImageIcon icon = new ImageIcon(this.getClass().getResource(""));
+		icon.setImage(icon.getImage().getScaledInstance(
+				imagemLabel.getWidth(),
+				imagemLabel.getHeight(),
+				Image.SCALE_DEFAULT
+		));
+		
+		imagemLabel.setIcon(icon);
 	}
 }
