@@ -25,7 +25,6 @@ public class JogoDaForca{
 	
 	public void setPalavraSecreta(String novaTentativa, int posicao) {
 		this.palavraSecreta[posicao] = getPalavra().charAt(posicao);
-		System.out.println(getPalavraSecreta());
 	}
 	private ArrayList<String> resultados = new ArrayList<String>();
 
@@ -127,8 +126,7 @@ public class JogoDaForca{
 				String letraAtual = String.valueOf(c); //transforma o c(char) em string
 				if (letraAtual.equals(letra)){
 					posicoes.add(posicao);
-					//System.out.println(letraAtual);
-					//System.out.println(letra);
+					setPalavraSecreta(letra,posicao); //muda a palavra com *
 				}
 				posicao++;
 			}

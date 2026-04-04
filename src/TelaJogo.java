@@ -141,12 +141,13 @@ public class TelaJogo {
 					try {
 						//Revelar as letras corretas
 						jogo.setTentativa(tentativa);
-						ArrayList<Integer> posicoesCorretas = jogo.getOcorrencias(tentativa);
+						jogo.getOcorrencias(tentativa);
+						/*ArrayList<Integer> posicoesCorretas = jogo.getOcorrencias(tentativa);
 						int tamanho = posicoesCorretas.size();
 						for(int i = 0;i < tamanho;i++) {
 							int posicao = posicoesCorretas.get(i);
 							jogo.setPalavraSecreta(tentativa,posicao);
-						}
+						}*/
 						String palavraEscondida = new String(jogo.getPalavraSecreta());
 						
 						String palavraSorteada = "palavra=" + palavraEscondida;
