@@ -8,17 +8,12 @@ public class JogoDaForca{
 	private String dica;
 	private Integer acertos = 0;
 	private Integer codigoPenalidades = 0;
-	private char tentativa;
-	private String msg = "";
-	
-	public char getTentativa() {
-		return tentativa;
-	}
-	
-	public void setTentativa(char novaTentativa) {
-		tentativa = novaTentativa;
-	}
+	private ArrayList<String> resultados = new ArrayList<String>();
 
+	public void setResultados(String novoResultado) {
+		resultados.add(novoResultado);
+	}
+	
 	public void setAcertos(Integer acertos) {
 		this.acertos = acertos;
 	}
@@ -64,8 +59,6 @@ public class JogoDaForca{
 			dicas.add(divisao[1]);
 		}
 		arquivo.close();
-		System.out.println(palavras);
-		System.out.println(dicas);
 	}
 	
 	public static void main(String[] args) {
@@ -85,13 +78,19 @@ public class JogoDaForca{
 
 	
 	public ArrayList<String> getResultados() {
-		return null;
-		//incompleto
+		return resultados;
 	}
 	
 	public ArrayList<Integer> getOcorrencias(String letra) throws Exception {
+		//checar se letra ja foi chutada
 			if(letra.length() != 1){ //lembrar de verificar também se o caracter é uma letra mesmo
+				if(letra.length() == 0) {
+					setResultados("campo vazio");
+				}else if(letra.length() > 1) {
+					setResultados("a letra possui mais de um caractere");
+				}
 				throw new Exception("Caractere inválido");
+				
 			}
 			ArrayList<Integer> posicoes = new ArrayList<>();
 			letra = letra.toUpperCase(); // Deixa a letra maiúscula
@@ -108,11 +107,13 @@ public class JogoDaForca{
 			if(posicoes.isEmpty()){
 				int erros = getCodigoPenalidade();
 				setCodigoPenalidades(erros+1);
+				setResultados("errou a letra " + letra);
 			} else {
 				int corretos = posicoes.size();
 				setAcertos(corretos + getAcertos());
+				setResultados("acertou a letra " + letra);
 			}
-		System.out.println(acertos);
+		//System.out.println(acertos);
 		return posicoes;
 	}
 	
@@ -135,8 +136,9 @@ public class JogoDaForca{
 	}
 	
 	public String getResultado() {
-		return null;
-		//incompleto
+		int tam = getResultados().size();
+		System.out.println(getResultados());
+		return getResultados().get(tam-1);
 	}
 }
 
