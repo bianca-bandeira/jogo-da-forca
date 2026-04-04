@@ -117,7 +117,14 @@ public class JogoDaForca{
 	}
 	
 	public boolean terminou() {
-		if()
+		if(getCodigoPenalidade() >= 6) {
+			return true;
+			//caso o jogador perca
+		}else if(true /*incompleto*/) {
+			//caso o jogador ganhe
+		}
+		//caso nenhum aconteça
+		return false;
 	}
 	
 	public int getAcertos() {
@@ -135,7 +142,6 @@ public class JogoDaForca{
 	
 	public String getResultado() {
 		int tam = getResultados().size();
-		System.out.println(getResultados());
 		return getResultados().get(tam-1);
 	}
 }
