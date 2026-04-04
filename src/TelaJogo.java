@@ -26,6 +26,7 @@ public class TelaJogo {
 	private JTextArea textArea;
 	private JLabel palavraLabel;
 	private JLabel imagemLabel;
+	private JLabel nomePenalidadeLabel;
 	
 	/**
 	 * Launch the application.
@@ -123,6 +124,10 @@ public class TelaJogo {
 		frame.getContentPane().add(tentativaField);
 		tentativaField.setColumns(10);
 		
+		JLabel nomePenalidadeLabel = new JLabel("penalidade=");
+		nomePenalidadeLabel.setBounds(10, 185, 222, 14);
+		frame.getContentPane().add(nomePenalidadeLabel);
+		
 		adivinharButton = new JButton("Adivinhar");
 		adivinharButton.setEnabled(false);
 		adivinharButton.addActionListener(new ActionListener() {
@@ -144,6 +149,11 @@ public class TelaJogo {
 						
 						String palavraSorteada = "palavra=" + palavraEscondida;
 						palavraLabel.setText(palavraSorteada);
+						
+						
+			
+						String penalidades = "penalidade= " + jogo.getNomePenalidade(jogo.getCodigoPenalidade());
+						nomePenalidadeLabel.setText(penalidades);
 
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
@@ -201,5 +211,6 @@ public class TelaJogo {
 		));
 		
 		imagemLabel.setIcon(icon);
+		
 	}
 }

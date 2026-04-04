@@ -165,7 +165,8 @@ public class JogoDaForca{
 		return codigoPenalidades;
 	}
 	
-	public String getNomePenalidade(Integer codigoPenalidades ) {
+	public String getNomePenalidade(Integer codigoPenalidades) {
+		if(codigoPenalidades == null) return nomePenalidades[0];
 		return nomePenalidades[codigoPenalidades];
 	}
 	
