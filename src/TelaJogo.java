@@ -86,6 +86,8 @@ public class TelaJogo {
 				
 				jogo.setResultados("palavra sorteada: " + jogo.getPalavra());
 				
+				nomePenalidadeLabel.setText("penalidade=");
+				
 				textArea.setText("jogo inicado - digite uma letra");
 				
 				ImageIcon icon = new ImageIcon(this.getClass().getResource("/imagens/0.png"));
@@ -124,7 +126,7 @@ public class TelaJogo {
 		frame.getContentPane().add(tentativaField);
 		tentativaField.setColumns(10);
 		
-		JLabel nomePenalidadeLabel = new JLabel("penalidade=");
+		nomePenalidadeLabel = new JLabel("penalidade=");
 		nomePenalidadeLabel.setBounds(10, 185, 222, 14);
 		frame.getContentPane().add(nomePenalidadeLabel);
 		
@@ -150,8 +152,6 @@ public class TelaJogo {
 						String palavraSorteada = "palavra=" + palavraEscondida;
 						palavraLabel.setText(palavraSorteada);
 						
-						
-			
 						String penalidades = "penalidade= " + jogo.getNomePenalidade(jogo.getCodigoPenalidade());
 						nomePenalidadeLabel.setText(penalidades);
 
@@ -159,13 +159,12 @@ public class TelaJogo {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					
 				}else {
 					textArea.setText("campo vazio");}
 				
-				if(jogo.getCodigoPenalidade() >= 6) {
-					jogo.setResultados("perdeu!");
+				if(jogo.terminou()) {
 					adivinharButton.setEnabled(false);
-
 				}
 				
 				String acertosTexto = "Acertos: " + Integer.toString(jogo.getAcertos());
@@ -184,7 +183,6 @@ public class TelaJogo {
 				));
 				
 				imagemLabel.setIcon(icon);
-
 			}
 				
 		});

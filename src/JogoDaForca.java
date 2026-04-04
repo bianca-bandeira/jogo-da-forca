@@ -8,7 +8,6 @@ public class JogoDaForca{
 	private Integer acertos = 0;
 	private Integer codigoPenalidades = 0;
 	private String tentativa;
-	private String msg = "";
 	private char[] palavraSecreta;
 	private String[] nomePenalidades = {"sem penalidades","perdeu primeira perna","perdeu segunda perna","perdeu primeiro braço","perdeu segundo braço","perdeu tronco","perdeu a cabeça"};
 	
@@ -26,6 +25,7 @@ public class JogoDaForca{
 	
 	public void setPalavraSecreta(String novaTentativa, int posicao) {
 		this.palavraSecreta[posicao] = getPalavra().charAt(posicao);
+		System.out.println(getPalavraSecreta());
 	}
 	private ArrayList<String> resultados = new ArrayList<String>();
 
@@ -148,9 +148,12 @@ public class JogoDaForca{
 	
 	public boolean terminou() {
 		if(getCodigoPenalidade() >= 6) {
+			setResultados("perdeu!");
 			return true;
 			//caso o jogador perca
-		}else if(true /*incompleto*/) {
+		}else if(!getPalavraSecreta().contains("*")) {
+			setResultados("ganhou!");
+			return true;
 			//caso o jogador ganhe
 		}
 		//caso nenhum aconteça
