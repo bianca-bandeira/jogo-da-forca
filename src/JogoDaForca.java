@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-
 import javax.swing.JOptionPane;
 
 public class JogoDaForca{
@@ -28,7 +27,13 @@ public class JogoDaForca{
 	public void setPalavraSecreta(String novaTentativa, int posicao) {
 		this.palavraSecreta[posicao] = getPalavra().charAt(posicao);
 	}
+	private ArrayList<String> resultados = new ArrayList<String>();
 
+
+	public void setResultados(String novoResultado) {
+		resultados.add(novoResultado);
+	}
+	
 	public void setAcertos(Integer acertos) {
 		this.acertos = acertos;
 	}
@@ -75,8 +80,6 @@ public class JogoDaForca{
 			dicas.add(divisao[1]);
 		}
 		arquivo.close();
-		//System.out.println(palavras);
-		//System.out.println(dicas);
 	}
 	
 	public static void main(String[] args) {
@@ -101,13 +104,19 @@ public class JogoDaForca{
 
 	
 	public ArrayList<String> getResultados() {
-		return null;
-		//incompleto
+		return resultados;
 	}
 	
 	public ArrayList<Integer> getOcorrencias(String letra) throws Exception {
+		//checar se letra ja foi chutada
 			if(letra.length() != 1){ //lembrar de verificar também se o caracter é uma letra mesmo
+				if(letra.length() == 0) {
+					setResultados("campo vazio");
+				}else if(letra.length() > 1) {
+					setResultados("a letra possui mais de um caractere");
+				}
 				throw new Exception("Caractere inválido");
+				
 			}
 			
 			letra = letra.toUpperCase(); // Deixa a letra maiúscula
@@ -124,16 +133,23 @@ public class JogoDaForca{
 			if(posicoes.isEmpty()){
 				int erros = getCodigoPenalidade();
 				setCodigoPenalidades(erros+1);
+				setResultados("errou a letra " + letra);
 			} else {
 				int corretos = posicoes.size();
 				setAcertos(corretos + getAcertos());
+				setResultados("acertou a letra " + letra);
 			}
-		//System.out.println(posicoes);
 		return posicoes;
 	}
 	
 	public boolean terminou() {
-		if(codigoPenalidades.equals(6)) return true;
+		if(getCodigoPenalidade() >= 6) {
+			return true;
+			//caso o jogador perca
+		}else if(true /*incompleto*/) {
+			//caso o jogador ganhe
+		}
+		//caso nenhum aconteça
 		return false;
 	}
 	
@@ -150,8 +166,8 @@ public class JogoDaForca{
 	}
 	
 	public String getResultado() {
-		return null;
-		//incompleto
+		int tam = getResultados().size();
+		return getResultados().get(tam-1);
 	}
 	
 	public String PalavraSecreta(String novaTentativa, int posicao) {
