@@ -20,8 +20,8 @@ public class JogoDaForca{
 		tentativa = novaTentativa;
 	}
 	
-	public char[] getPalavraSecreta() {
-		return palavraSecreta;
+	public String getPalavraSecreta() {
+		return new String(palavraSecreta);
 	}
 	
 	public void setPalavraSecreta(String novaTentativa, int posicao) {
@@ -62,7 +62,7 @@ public class JogoDaForca{
 
 	ArrayList<String> palavras = new ArrayList<>();
 	ArrayList<String> dicas = new ArrayList<>();
-	ArrayList<Integer> posicoes = new ArrayList<>();
+	
 
 	public JogoDaForca() {
 		
@@ -109,6 +109,7 @@ public class JogoDaForca{
 	
 	public ArrayList<Integer> getOcorrencias(String letra) throws Exception {
 		//checar se letra ja foi chutada
+		ArrayList<Integer> posicoes = new ArrayList<>();
 			if(letra.length() != 1){ //lembrar de verificar também se o caracter é uma letra mesmo
 				if(letra.length() == 0) {
 					setResultados("campo vazio");
@@ -126,6 +127,8 @@ public class JogoDaForca{
 				String letraAtual = String.valueOf(c); //transforma o c(char) em string
 				if (letraAtual.equals(letra)){
 					posicoes.add(posicao);
+					//System.out.println(letraAtual);
+					//System.out.println(letra);
 				}
 				posicao++;
 			}
@@ -134,6 +137,7 @@ public class JogoDaForca{
 				int erros = getCodigoPenalidade();
 				setCodigoPenalidades(erros+1);
 				setResultados("errou a letra " + letra);
+				return new ArrayList<>();
 			} else {
 				int corretos = posicoes.size();
 				setAcertos(corretos + getAcertos());
@@ -168,11 +172,6 @@ public class JogoDaForca{
 	public String getResultado() {
 		int tam = getResultados().size();
 		return getResultados().get(tam-1);
-	}
-	
-	public String PalavraSecreta(String novaTentativa, int posicao) {
-		palavraSecreta[posicao] = novaTentativa.charAt(posicao);
-		return new String(palavraSecreta);
 	}
 }
 

@@ -24,15 +24,15 @@ public class Teste {
 				if (ocorrencias.size() > 0)
 					JOptionPane.showMessageDialog(null,
 							"voce acertou a letra =" + letraDigitada + "\n------------RESUMO-------------------"
-									+ "\n palavra adivinhada=" + jogo.getPalavra() + "\n total de acertos = "
+									+ "\n palavra adivinhada=" + jogo.getPalavraSecreta() + "\n total de acertos = "
 									+ jogo.getAcertos() + "\n penalidade = " + jogo.getCodigoPenalidade() + "-"
-									+ jogo.getNomePenalidade() + "\n-------------------------------------");
+									+ jogo.getNomePenalidade(jogo.getCodigoPenalidade()) + "\n-------------------------------------");
 				else
 					JOptionPane.showMessageDialog(null,
 							"voce errou a letra =" + letraDigitada + "\n------------RESUMO-------------------"
-									+ "\n palavra adivinhada=" + jogo.getPalavra() + "\n total de acertos = "
+									+ "\n palavra adivinhada=" + jogo.getPalavraSecreta() + "\n total de acertos = "
 									+ jogo.getAcertos() + "\n penalidade = " + jogo.getCodigoPenalidade() + "-"
-									+ jogo.getNomePenalidade() + "\n-------------------------------------");
+									+ jogo.getNomePenalidade(jogo.getCodigoPenalidade()) + "\n-------------------------------------");
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null,"mensagem="+ e.getMessage());
 			}
