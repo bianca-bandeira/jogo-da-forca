@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-
 import javax.swing.JOptionPane;
 
 public class JogoDaForca{
@@ -118,8 +117,7 @@ public class JogoDaForca{
 	}
 	
 	public boolean terminou() {
-		return false;
-		//incompleto
+		if()
 	}
 	
 	public int getAcertos() {
