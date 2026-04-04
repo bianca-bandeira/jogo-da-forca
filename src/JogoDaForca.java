@@ -8,15 +8,25 @@ public class JogoDaForca{
 	private String dica;
 	private Integer acertos = 0;
 	private Integer codigoPenalidades = 0;
-	private char tentativa;
+	private String tentativa;
 	private String msg = "";
+	private char[] palavraSecreta;
+	private String[] nomePenalidades = {"sem penalidades","perdeu primeira perna","perdeu segunda perna","perdeu primeiro braço","perdeu segundo braço","perdeu tronco","perdeu a cabeça"};
 	
-	public char getTentativa() {
+	public String getTentativa() {
 		return tentativa;
 	}
 	
-	public void setTentativa(char novaTentativa) {
+	public void setTentativa(String novaTentativa) {
 		tentativa = novaTentativa;
+	}
+	
+	public char[] getPalavraSecreta() {
+		return palavraSecreta;
+	}
+	
+	public void setPalavraSecreta(String novaTentativa, int posicao) {
+		this.palavraSecreta[posicao] = getPalavra().charAt(posicao);
 	}
 
 	public void setAcertos(Integer acertos) {
@@ -47,6 +57,7 @@ public class JogoDaForca{
 
 	ArrayList<String> palavras = new ArrayList<>();
 	ArrayList<String> dicas = new ArrayList<>();
+	ArrayList<Integer> posicoes = new ArrayList<>();
 
 	public JogoDaForca() {
 		
@@ -64,8 +75,8 @@ public class JogoDaForca{
 			dicas.add(divisao[1]);
 		}
 		arquivo.close();
-		System.out.println(palavras);
-		System.out.println(dicas);
+		//System.out.println(palavras);
+		//System.out.println(dicas);
 	}
 	
 	public static void main(String[] args) {
@@ -81,6 +92,11 @@ public class JogoDaForca{
 
 		String dicaSorteada = dicas.get(numero);
 		setDica(dicaSorteada);
+		
+		this.palavraSecreta = new char[getPalavra().length()];
+		for(int i = 0; i < getPalavra().length();i++) {
+			palavraSecreta[i] = '*';
+		}
 	}
 
 	
@@ -93,7 +109,7 @@ public class JogoDaForca{
 			if(letra.length() != 1){ //lembrar de verificar também se o caracter é uma letra mesmo
 				throw new Exception("Caractere inválido");
 			}
-			ArrayList<Integer> posicoes = new ArrayList<>();
+			
 			letra = letra.toUpperCase(); // Deixa a letra maiúscula
 			int posicao = 0; // vai ser o contador
 
@@ -112,13 +128,13 @@ public class JogoDaForca{
 				int corretos = posicoes.size();
 				setAcertos(corretos + getAcertos());
 			}
-		System.out.println(acertos);
+		//System.out.println(posicoes);
 		return posicoes;
 	}
 	
 	public boolean terminou() {
+		if(codigoPenalidades.equals(6)) return true;
 		return false;
-		//incompleto
 	}
 	
 	public int getAcertos() {
@@ -129,14 +145,18 @@ public class JogoDaForca{
 		return codigoPenalidades;
 	}
 	
-	public String getNomePenalidade() {
-		return null;
-		//incompleto
+	public String getNomePenalidade(Integer codigoPenalidades ) {
+		return nomePenalidades[codigoPenalidades];
 	}
 	
 	public String getResultado() {
 		return null;
 		//incompleto
+	}
+	
+	public String PalavraSecreta(String novaTentativa, int posicao) {
+		palavraSecreta[posicao] = novaTentativa.charAt(posicao);
+		return new String(palavraSecreta);
 	}
 }
 

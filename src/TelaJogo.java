@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -79,7 +80,8 @@ public class TelaJogo {
 				String dicaSorteada = "Dica: " + jogo.getDica();
 				dicaLabel.setText(dicaSorteada);
 				
-				String palavraSorteada = "palavra=" + jogo.getPalavra();
+				String palavraEscondida = new String(jogo.getPalavraSecreta());
+				String palavraSorteada = "palavra=" + palavraEscondida;
 				palavraLabel.setText(palavraSorteada);
 			}
 		});
@@ -117,7 +119,19 @@ public class TelaJogo {
 				if(!(tentativa.isEmpty())){
 									//jogo.setTentativa(tentativaChar)
 					try {
-						jogo.getOcorrencias(tentativa);
+						//Revelar as letras corretas
+						jogo.setTentativa(tentativa);
+						ArrayList<Integer> posicoesCorretas = jogo.getOcorrencias(tentativa);
+						int tamanho = posicoesCorretas.size();
+						for(int i = 0;i < tamanho;i++) {
+							int posicao = posicoesCorretas.get(i);
+							jogo.setPalavraSecreta(tentativa,posicao);
+						}
+						String palavraEscondida = new String(jogo.getPalavraSecreta());
+						
+						String palavraSorteada = "palavra=" + palavraEscondida;
+						palavraLabel.setText(palavraSorteada);
+
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -132,8 +146,8 @@ public class TelaJogo {
 				String penalidadeTexto = "Penalidade: " + Integer.toString(jogo.getCodigoPenalidade());
 				penalidadeLabel.setText(penalidadeTexto);
 				
-				
 			}
+				
 		});
 		adivinharButton.setBounds(125, 89, 107, 20);
 		frame.getContentPane().add(adivinharButton);
