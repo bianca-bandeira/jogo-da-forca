@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-
 import javax.swing.JOptionPane;
 
 public class JogoDaForca{
@@ -118,8 +117,14 @@ public class JogoDaForca{
 	}
 	
 	public boolean terminou() {
+		if(getCodigoPenalidade() >= 6) {
+			return true;
+			//caso o jogador perca
+		}else if(true /*incompleto*/) {
+			//caso o jogador ganhe
+		}
+		//caso nenhum aconteça
 		return false;
-		//incompleto
 	}
 	
 	public int getAcertos() {
@@ -137,7 +142,6 @@ public class JogoDaForca{
 	
 	public String getResultado() {
 		int tam = getResultados().size();
-		System.out.println(getResultados());
 		return getResultados().get(tam-1);
 	}
 }

@@ -63,7 +63,6 @@ public class TelaJogo {
 		iniciarButton = new JButton("Iniciar");
 		iniciarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Precisa iniciar botão adivinhar
 				jogo.iniciar();
 				jogo.setAcertos(0);
 				jogo.setCodigoPenalidades(0);
@@ -81,6 +80,8 @@ public class TelaJogo {
 				
 				String palavraSorteada = "palavra=" + jogo.getPalavra();
 				palavraLabel.setText(palavraSorteada);
+				
+				jogo.setResultados("palavra sorteada: " + jogo.getPalavra());
 				
 				textArea.setText("jogo inicado - digite uma letra");
 				
